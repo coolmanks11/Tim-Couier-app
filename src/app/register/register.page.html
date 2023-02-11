@@ -1,0 +1,26 @@
+
+<ion-content>
+  <div lines="full" class="main-block">
+    <h1>Register </h1>
+    <form [formGroup]="credentials" (ngSubmit)="submitReisterForm()">
+      <hr>
+      
+      <ion-label id="icon" for="name"><i class="fas fa-envelope"></i></ion-label>
+      <ion-input  formControlName="email" type="text"  id="email" placeholder="Email" required></ion-input>
+      <ion-label id="icon" for="password"><i class="fas fa-unlock-alt"></i></ion-label>
+      <ion-input  formControlName="password" type="password" id="password" placeholder="Password" required></ion-input>
+      <ion-label id="icon" for="password"><i class="fa fa-users" aria-hidden="true"></i></ion-label>
+      <ion-input  formControlName="firstname" type="text" id="firstname" placeholder="First Name" required></ion-input>
+      <ion-input  formControlName="lastname" type="text" id="lastname" placeholder="Last Name" required></ion-input>
+
+      <hr>
+      <div class="btn-block">
+        <ion-button expand="full" [disabled]="!credentials.valid" type="submit">Register</ion-button>
+      </div>
+      <div class="loginDiv">
+        Having Account Already? 
+        <u routerLink="/login">login Here</u>
+      </div>
+    </form>
+  </div>
+</ion-content>

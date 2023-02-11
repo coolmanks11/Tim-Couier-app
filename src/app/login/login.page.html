@@ -1,0 +1,23 @@
+
+<ion-content>
+  <div lines="full" class="main-block">
+    <h1>Login </h1>
+    <form [formGroup]="credentials" (ngSubmit)="submitLoginForm()">
+      <hr>
+      
+      <ion-label id="icon" for="name"><i class="fas fa-envelope"></i></ion-label>
+      <ion-input  formControlName="email" type="text"  id="email" placeholder="Email" required></ion-input>
+      <ion-label id="icon" for="password"><i class="fas fa-unlock-alt"></i></ion-label>
+      <ion-input  formControlName="password" type="password" id="password" placeholder="Password" required></ion-input>
+
+      <hr>
+      <div class="btn-block">
+        <ion-button expand="full" [disabled]="!credentials.valid" type="submit">Login</ion-button>
+      </div>
+      <div class="loginDiv">
+        Need Account? 
+        <u routerLink="/register">Sign Up Here</u>
+      </div>
+    </form>
+  </div>
+</ion-content>
