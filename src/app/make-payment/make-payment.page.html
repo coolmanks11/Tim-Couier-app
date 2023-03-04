@@ -40,20 +40,20 @@
   <ion-label><h1><strong>Card Details</strong></h1></ion-label>
   <ion-list>
       <ion-item lines="none">
-        <ion-label position="floating">Card Number</ion-label>
+        <ion-label position="stacked">Card Number</ion-label>
         <ion-input maxlength="16" type="number" inputmode="numeric" formControlName="cardNumber" placeholder="1234 5678 9012 3456"></ion-input>
       </ion-item>
       
       <ion-note *ngIf="paymentForm.controls['cardNumber'].invalid && paymentForm.controls['cardNumber'].touched">Please enter a valid card number</ion-note>
 
       <ion-item lines="none">
-        <ion-label position="floating">Expiry Date</ion-label>
+        <ion-label position="stacked">Expiry Date</ion-label>
         <ion-input maxlength="5" type="number" inputmode="numeric" formControlName="expiryDate" placeholder="MM / YY"></ion-input>
       </ion-item>
       <ion-note *ngIf="paymentForm.controls['expiryDate'].invalid && paymentForm.controls['expiryDate'].touched">Please enter a valid expiry date (MM/YY)</ion-note>
 
       <ion-item lines="none">
-        <ion-label position="floating">CVV</ion-label>
+        <ion-label position="stacked">CVV</ion-label>
         <ion-input maxlength="3" type="number" inputmode="numeric" formControlName="cvv" placeholder="123"></ion-input>
       </ion-item>
       <ion-note *ngIf="paymentForm.controls['cvv'].invalid && paymentForm.controls['cvv'].touched">Please enter a valid CVV number</ion-note>
