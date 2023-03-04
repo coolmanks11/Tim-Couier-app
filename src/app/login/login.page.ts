@@ -55,6 +55,7 @@ export class LoginPage implements OnInit {
 		if (user) {
 			var id = user.user.uid;
 			// var token = user.user.getIdToken;
+			
 			localStorage.setItem('userId', id);
 			this.router.navigateByUrl('/home', { replaceUrl: true });
 		} else {

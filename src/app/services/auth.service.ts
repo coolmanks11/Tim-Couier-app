@@ -32,7 +32,7 @@ export class AuthService {
       };
       const userRef = collection(this.firestore, 'Users');
 
-      addDoc(userRef,userdetails)
+      	addDoc(userRef,userdetails)
 			return user;
 		} catch (e) {
 			return null;
@@ -54,5 +54,9 @@ export class AuthService {
 		console.log("auth service "+this.auth)
 		return signOut(this.auth);
 	}
-	
+	getCurrentUser(){
+		console.log(this.auth.currentUser);
+
+		return this.auth.currentUser;
+	}
 }

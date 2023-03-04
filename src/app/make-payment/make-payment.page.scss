@@ -1,0 +1,34 @@
+ion-radio {
+    --border-radius: 4px;
+    --inner-border-radius: 4px;
+  
+    --color: #ddd;
+    --color-checked: #fac037;
+  }
+  
+  ion-radio.ios {
+    width: 20px;
+    height: 20px;
+  
+    border: 2px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .radio-checked.ios {
+    border-color: #fac037;
+  }
+  ion-note {
+
+    color: red;
+  }
+  ion-item{
+    border-radius: 15px;
+    margin-bottom: 0.5em;
+    border: 1px solid ;  
+    border-color: rgb(18, 40, 33);
+    
+  }
+  ion-item{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }

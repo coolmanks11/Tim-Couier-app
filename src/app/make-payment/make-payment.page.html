@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <app-nav-previous-btn slot="start"></app-nav-previous-btn>
+    <ion-title>Payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-label><h1><strong>Type</strong></h1></ion-label>
+    <ion-radio-group [(ngModel)]="paymentType">
+      <ion-item lines="none">
+        <ion-label>Card</ion-label>
+        <ion-radio value="card"></ion-radio>
+      </ion-item>
+      <ion-item lines="none" >
+        <ion-label>Cash</ion-label>
+        <ion-radio value="cash"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <hr>
+  
+<ion-list  *ngIf="paymentType=='cash'">
+  <ion-label><h1><strong>Payer</strong></h1></ion-label>
+  <ion-radio-group [(ngModel)]="payer" >
+    <ion-item lines="none">
+      <ion-label>Sender</ion-label>
+      <ion-radio value="sender"></ion-radio>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Receiver</ion-label>
+      <ion-radio value="receiver"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <br>
+  <ion-button class="ion-float-right"  (click)=createOrder()>Create</ion-button>
+</ion-list>
+<form *ngIf="paymentType === 'card'" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+  <ion-label><h1><strong>Card Details</strong></h1></ion-label>
+  <ion-list>
+      <ion-item lines="none">
+        <ion-label position="floating">Card Number</ion-label>
+        <ion-input maxlength="16" type="number" inputmode="numeric" formControlName="cardNumber" placeholder="1234 5678 9012 3456"></ion-input>
+      </ion-item>
+      
+      <ion-note *ngIf="paymentForm.controls['cardNumber'].invalid && paymentForm.controls['cardNumber'].touched">Please enter a valid card number</ion-note>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Expiry Date</ion-label>
+        <ion-input maxlength="5" type="number" inputmode="numeric" formControlName="expiryDate" placeholder="MM / YY"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="paymentForm.controls['expiryDate'].invalid && paymentForm.controls['expiryDate'].touched">Please enter a valid expiry date (MM/YY)</ion-note>
+
+      <ion-item lines="none">
+        <ion-label position="floating">CVV</ion-label>
+        <ion-input maxlength="3" type="number" inputmode="numeric" formControlName="cvv" placeholder="123"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="paymentForm.controls['cvv'].invalid && paymentForm.controls['cvv'].touched">Please enter a valid CVV number</ion-note>
+  </ion-list>
+  <br>
+  <ion-button class="ion-float-right" type="submit">Pay</ion-button>
+</form>
+
+
+</ion-content>

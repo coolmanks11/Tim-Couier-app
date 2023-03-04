@@ -20,8 +20,16 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'pick-up-form',
-    loadChildren: () => import('./pick-up-form/pick-up-form.module').then( m => m.PickUpFormPageModule)
+    path: 'create-order-details',
+    loadChildren: () => import('./create-order-details/create-order-details.module').then( m => m.CreateOrderDetailsPageModule)
+  },
+  {
+    path: 'create-order-details/:id',
+    loadChildren: () => import('./create-order-details/create-order-details.module').then( m => m.CreateOrderDetailsPageModule)
+  },
+  {
+    path: 'make-payment',
+    loadChildren: () => import('./make-payment/make-payment.module').then( m => m.MakePaymentPageModule)
   },
 ];
 

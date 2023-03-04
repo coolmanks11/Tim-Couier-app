@@ -37,8 +37,8 @@ export class RegisterPage implements OnInit {
 		this.credentials = this.fb.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(6)]],
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]]
+			firstname: ['', [Validators.required]],
+			lastname: ['', [Validators.required]]
 		});
 	}
   submitReisterForm()

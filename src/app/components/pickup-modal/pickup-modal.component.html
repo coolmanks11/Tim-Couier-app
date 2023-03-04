@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Pick up</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="pickupForm" >
+  <ion-item>
+    <ion-label position="stacked" for="pick_recipient_name">Name</ion-label>
+    <ion-input type="text" id="pick_recipient_name" formControlName="pick_recipient_name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="pick_recipient_address"> Address</ion-label>
+    <ion-input type="text" id="pick_recipient_address" formControlName="pick_recipient_address"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="pick_recipient_city"> City</ion-label>
+    <ion-input type="text" id="pick_recipient_city" formControlName="pick_recipient_city"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="pick_recipient_county"> County</ion-label>
+    <ion-input type="text" id="pick_recipient_county" formControlName="pick_recipient_county"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="pick_recipient_eircode"> Eircode</ion-label>
+    <ion-input type="text" id="pick_recipient_eircode" formControlName="pick_recipient_eircode"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="pick_recipient_phone">Phone</ion-label>
+    <ion-input  type="number" id="pick_recipient_phone" formControlName="pick_recipient_phone"></ion-input>
+  </ion-item>
+</form>
+</ion-content>  

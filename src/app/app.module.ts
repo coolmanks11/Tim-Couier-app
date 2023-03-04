@@ -12,13 +12,15 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import {provideAuth,getAuth} from '@angular/fire/auth';
+import { PickupModalComponent } from './components/pickup-modal/pickup-modal.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
+    
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

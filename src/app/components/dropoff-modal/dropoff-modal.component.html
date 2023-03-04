@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title >Drop off</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="dropoffForm" >
+  <ion-item>
+    <ion-label position="stacked" for="drop_recipient_name">Name</ion-label>
+    <ion-input type="text" id="drop_recipient_name" formControlName="drop_recipient_name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="drop_recipient_address"> Address</ion-label>
+    <ion-input type="text" id="drop_recipient_address" formControlName="drop_recipient_address"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="drop_recipient_city"> City</ion-label>
+    <ion-input type="text" id="drop_recipient_city" formControlName="drop_recipient_city"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="drop_recipient_county"> County</ion-label>
+    <ion-input type="text" id="drop_recipient_county" formControlName="drop_recipient_county"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="drop_recipient_eircode"> Eircode</ion-label>
+    <ion-input type="text" id="drop_recipient_eircode" formControlName="drop_recipient_eircode"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked" for="drop_recipient_phone">Phone</ion-label>
+    <ion-input  type="number" id="drop_recipient_phone" formControlName="drop_recipient_phone"></ion-input>
+  </ion-item>
+</form>
+</ion-content>  
