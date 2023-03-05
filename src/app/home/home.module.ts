@@ -21,6 +21,6 @@ import {SharedModuleModule} from '../modules/shared-module/shared-module.module'
     ReactiveFormsModule,
     SharedModuleModule
   ],
-  declarations: [HomePage,SideMenuComponent,PickupModalComponent,DropoffModalComponent,DateModalComponent]
+  declarations: [HomePage,PickupModalComponent,DropoffModalComponent,DateModalComponent]
 })
 export class HomePageModule {}

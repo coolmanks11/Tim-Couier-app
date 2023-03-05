@@ -1,64 +1,63 @@
-<ion-app>
-  <!-- side menu -->
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <app-side-menu></app-side-menu>
-    </ion-content>
-  </ion-menu>++++++++++++
-  <!-- app content -->
-  <div class="ion-page" id="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Home</ion-title>
-        <div slot="end">
-          <app-logout-button></app-logout-button>
-        </div>
-      </ion-toolbar>
-    </ion-header>
+<!-- side menu -->
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="warning">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-content class="ion-padding">
-      <!-- <form [formGroup]="credentials"> -->
-      <form>
-        <ion-item lines="none">
-          <div slot="start">
-            <ion-label >{{ senderName }}</ion-label>
-          </div>
-          <div slot="end" >
-            <ion-button expand="block" (click)="openPickUpModal()">+</ion-button>
-          </div>
-        </ion-item>
-        <ion-item lines="none">
-          <div slot="start">
-            <ion-label>{{ receiverName }}</ion-label>
-          </div>
-          <div slot="end" >
-            <ion-button expand="block" (click)="openDropOffModal()">+</ion-button>
-          </div>
-        </ion-item>
-        <ion-item lines="none">
-            <div slot="end"> <ion-icon (click)="openDateModal()" icon ='calendar-outline' slot="start" color="primary"></ion-icon></div>
-            <div slot="start">{{ formattedDateString }}</div>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-select (ionChange)="deliveryOption($event)" interface="action-sheet" placeholder="Delivery option">
-            <ion-select-option value="car-5">Car - 5kg </ion-select-option>
-            <ion-select-option value="car-20">Car - 20kg</ion-select-option>
-            <ion-select-option value="car-50">Car - 50kg</ion-select-option>
-            <ion-select-option value="van-100">Van - 100kg</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-button (click)="submit()">Next</ion-button>
-        <!-- [disabled]="!credentials.valid -->
-      </form>
-    </ion-content>
-  </div>
-  
-</ion-app>
+  <ion-content class="ion-padding">
+    <app-side-menu></app-side-menu>
+  </ion-content>
+</ion-menu>
+<!-- app content -->
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Home</ion-title>
+      <div slot="end">
+        <app-logout-button></app-logout-button>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <!-- <form [formGroup]="credentials"> -->
+    <form>
+      <ion-item lines="none">
+        <div slot="start">
+          <ion-label>{{ senderName }}</ion-label>
+        </div>
+        <div slot="end">
+          <ion-button class='buttonStyle' expand="block" (click)="openPickUpModal()">+</ion-button>
+        </div>
+      </ion-item>
+      <ion-item lines="none">
+        <div slot="start">
+          <ion-label>{{ receiverName }}</ion-label>
+        </div>
+        <div slot="end">
+          <ion-button class='buttonStyle' expand="block" (click)="openDropOffModal()">+</ion-button>
+        </div>
+      </ion-item>
+      <ion-item lines="none">
+        <div slot="end"> <ion-icon (click)="openDateModal()" icon='calendar-outline' slot="start"
+            color="primary"></ion-icon></div>
+        <div slot="start">{{ formattedDateString }}</div>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-select (ionChange)="deliveryOption($event)" interface="action-sheet" placeholder="Delivery option">
+          <ion-select-option value="car-5">Car - 5kg </ion-select-option>
+          <ion-select-option value="car-20">Car - 20kg</ion-select-option>
+          <ion-select-option value="car-50">Car - 50kg</ion-select-option>
+          <ion-select-option value="van-100">Van - 100kg</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button class='buttonStyle' (click)="submit()">Next</ion-button>
+      <!-- [disabled]="!credentials.valid -->
+    </form>
+  </ion-content>
+</div>

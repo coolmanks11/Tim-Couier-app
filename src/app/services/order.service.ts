@@ -7,12 +7,16 @@ import {
   docData,
   addDoc,
   deleteDoc,
-  updateDoc
+  updateDoc,
+  where,
+  query,
+  getDoc
 } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { createOrderDetails } from '../DTO/createOrderDetailsDto';
 import { Order } from '../DTO/Order';
 import { AuthService } from '../services/auth.service';
-
+import { Counter } from '../DTO/Counter'
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +24,7 @@ export class OrderService {
 
   constructor(private firestore: Firestore, private auth: AuthService) { }
 
-  createOrder(createOrderDetailsDto: createOrderDetails) {
+  async createOrder(createOrderDetailsDto: createOrderDetails) {
     const orderRef = collection(this.firestore, 'orders')
     const currUser = this.auth.getCurrentUser();
     if (currUser !== null) {
@@ -54,5 +58,14 @@ export class OrderService {
 
       addDoc(orderRef, order);
     }
+  }
+  getOrdersByUserId(userId: string): Observable<Order[]> {
+    const ordersRef = collection(this.firestore, 'orders');
+    const queryRef = query(ordersRef, where('user_id', '==', userId));
+    return collectionData<any>(queryRef);
+  }
+  getOrderCounter(): Observable<number> {
+    const counterRef = doc(this.firestore, 'counters/order');
+    return docData<any>(counterRef)
   }
 }

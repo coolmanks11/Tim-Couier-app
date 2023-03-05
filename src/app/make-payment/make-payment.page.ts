@@ -23,7 +23,7 @@ export class MakePaymentPage implements OnInit {
   ) {
     this.paymentForm = this.fb.group({
       cardNumber: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{16}$')])],
-      expiryDate: ['', Validators.compose([Validators.required, Validators.pattern('^(0[1-9]|1[0-2])[/]([0-9]{2})$')])],
+      expiryDate: ['', Validators.compose([Validators.required, Validators.pattern('^(0[1-9]|1[0-2])([0-9]{2})$')])],
       cvv: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{3}$')])],
       amount: ['', Validators.compose([Validators.required, Validators.pattern('^\\d+$')])]
     });
@@ -84,7 +84,9 @@ export class MakePaymentPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+    this.createOrderDetailsService.resetOrderDetails();
     this.router.navigate(['home']);
+
   }
 
 

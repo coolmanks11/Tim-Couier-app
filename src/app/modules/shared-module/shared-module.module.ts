@@ -12,11 +12,14 @@ import {NavPreviousBtnComponent} from '../../components/nav-previous-btn/nav-pre
 
 
 @NgModule({
-  declarations: [NavPreviousBtnComponent,LogoutButtonComponent],
+  declarations: [NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent],
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule,  
+    // HomePageRoutingModule,
+    // ReactiveFormsModule,
   ],
-  exports:[NavPreviousBtnComponent,LogoutButtonComponent]
+  exports:[NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent]
 })
 export class SharedModuleModule { }
