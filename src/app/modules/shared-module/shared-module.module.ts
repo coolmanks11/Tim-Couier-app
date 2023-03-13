@@ -10,9 +10,9 @@ import {DropoffModalComponent} from '../../components/dropoff-modal/dropoff-moda
 import {DateModalComponent} from '../../components/date-modal/date-modal.component';
 import {NavPreviousBtnComponent} from '../../components/nav-previous-btn/nav-previous-btn.component'
 
-
+import {TabMenuComponent} from '../../components/tab-menu/tab-menu.component';
 @NgModule({
-  declarations: [NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent],
+  declarations: [NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent,TabMenuComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -20,6 +20,6 @@ import {NavPreviousBtnComponent} from '../../components/nav-previous-btn/nav-pre
     // HomePageRoutingModule,
     // ReactiveFormsModule,
   ],
-  exports:[NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent]
+  exports:[NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent,TabMenuComponent]
 })
 export class SharedModuleModule { }
