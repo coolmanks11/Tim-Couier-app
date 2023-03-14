@@ -13,7 +13,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import {provideAuth,getAuth} from '@angular/fire/auth';
 import { PickupModalComponent } from './components/pickup-modal/pickup-modal.component';
-
+import {SharedModuleModule} from './modules/shared-module/shared-module.module';
 @NgModule({
   declarations: [AppComponent,],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
@@ -21,7 +21,7 @@ import { PickupModalComponent } from './components/pickup-modal/pickup-modal.com
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
-    
+    SharedModuleModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

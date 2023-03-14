@@ -44,26 +44,26 @@ export class AuthService {
 
 	}
 
-		async login(email: string, password: string) {
-			try {
-				const user = await signInWithEmailAndPassword(this.auth, email, password);
-				//check user exist in user collect or not 
-				const usersRef = collection(this.firestore, 'Users');
-				const userQuery = query(usersRef, where('id', '==', user.user.uid));
-				const querySnapshot = await getDocs(userQuery);
-			
-				if (querySnapshot.empty) {
-				  return null;
-				}
-				const userData = querySnapshot.docs[0].data() as User;
-				console.log(userData.firstname);
-				return user;
-			} catch (e) {
-				console.log(e);
-			return null;
+	async login(email: string, password: string) {
+		try {
+			const user = await signInWithEmailAndPassword(this.auth, email, password);
+			//check user exist in user collect or not 
+			const usersRef = collection(this.firestore, 'Users');
+			const userQuery = query(usersRef, where('id', '==', user.user.uid));
+			const querySnapshot = await getDocs(userQuery);
+
+			if (querySnapshot.empty) {
+				return null;
 			}
+			const userData = querySnapshot.docs[0].data() as User;
+			console.log(userData.firstname);
+			return user;
+		} catch (e) {
+			console.log(e);
+			return null;
 		}
-	  
+	}
+
 
 	logout() {
 		console.log("auth service " + this.auth)
