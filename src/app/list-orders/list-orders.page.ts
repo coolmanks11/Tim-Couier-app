@@ -17,25 +17,39 @@ export class ListOrdersPage implements OnInit {
   orderId_counter : number = 0;
   ngOnInit() {
     this.getOrders();
-  }
 
+  }
+  onIonViewDidEnter():void{
+    this.getOrders();
+    
+  }
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.getOrders();
+      event.target.complete();
+    }, 2000);
+  };
   getOrders() {
     const user = this.auth.getCurrentUser();
     if (user !== null) {
       this.orderservice.getOrdersByUserId(user.uid).subscribe(
         orders => {
           this.orders = orders
-          console.log(orders); 
+
         },
       );
     }
+    
 
   }
-  refresh(){
-    this.getOrders();
-  }
-  test(){
-    console.log('asdsa');
+  // refresh(){
+  //   this.getOrders();
+  // }
+  getOrderByOrderId(id : string){
+    this.orderservice.getOrderByOrderId(id).subscribe(orders =>{
+      
+    })
   }
 
 }
