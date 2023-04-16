@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngIf="orderDetails">
     <ion-card-header>
       <ion-card-title>Order Number #{{ orderDetails.order_id }}</ion-card-title>
     </ion-card-header>
@@ -35,5 +35,6 @@
       <p>Payment type: {{ orderDetails.payment.payment_type }}</p>
       <p *ngIf="orderDetails.payment.payer">Payer: {{ orderDetails.payment.payer }}</p>
     </ion-card-content>
+
   </ion-card>
 </ion-content>

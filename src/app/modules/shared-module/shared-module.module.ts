@@ -11,6 +11,7 @@ import {DateModalComponent} from '../../components/date-modal/date-modal.compone
 import {NavPreviousBtnComponent} from '../../components/nav-previous-btn/nav-previous-btn.component'
 
 import {TabMenuComponent} from '../../components/tab-menu/tab-menu.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent,TabMenuComponent],
   imports: [
@@ -19,6 +20,7 @@ import {TabMenuComponent} from '../../components/tab-menu/tab-menu.component';
     FormsModule,  
     // HomePageRoutingModule,
     // ReactiveFormsModule,
+    HttpClientModule
   ],
   exports:[NavPreviousBtnComponent,LogoutButtonComponent,SideMenuComponent,TabMenuComponent]
 })

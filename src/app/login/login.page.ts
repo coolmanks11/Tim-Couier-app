@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-
+import { GoogleMapService } from '../services/google-map.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,7 +17,8 @@ export class LoginPage implements OnInit {
 		private loadingController: LoadingController,
 		private alertController: AlertController,
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+		private googleMapService : GoogleMapService
 	) {
 
 
@@ -33,16 +34,45 @@ export class LoginPage implements OnInit {
 	}
 
 	ngOnInit() {
-    
+		this.test();
 		this.credentials = this.fb.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(6)]]
 		});
 	}
+	async test() {
+		const firstAddress = "133, rockfield manor, hoeys lane, dundalk, Co. Louth";
+		const secondAddress = "91, rockfield manor, hoeys lane, dundalk, Co. Louth";
+		const firstAddressLatLng = await this.getAddressLatLng(firstAddress);
+		const secondAddressLatLng = await this.getAddressLatLng(secondAddress);
+	
+		if (firstAddressLatLng && secondAddressLatLng) {
+			const distanceInMeters = await this.googleMapService.getDistanceBetweenLocations(
+				firstAddressLatLng,
+				secondAddressLatLng
+			);
+			console.log("Distance in meters:", distanceInMeters);
+		} else {
+			console.error("Error getting lat and lng for one or both addresses");
+		}
+	}
+	
 	submitLoginForm()
 	{
 		this.login();
 	}
+	async getAddressLatLng(address: string): Promise<{ lat: number; lng: number } | null> {
+		try {
+			const latLng = await this.googleMapService.getLatLngFromAddress(address);
+			console.log('Latitude:', latLng.lat, 'Longitude:', latLng.lng);
+			return latLng;
+		} catch (error) {
+			console.error('Error getting LatLng:', error);
+			return null;
+		}
+	}
+	
+
 
 	
 	async login() {
