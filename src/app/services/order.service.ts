@@ -53,24 +53,28 @@ export class OrderService {
         delivery_mode: createOrderDetailsDto.delivery_mode,
         created_date: createOrderDetailsDto.created_date,
         pick_up_time: createOrderDetailsDto.pick_up_time,
-
+        distance_KM: createOrderDetailsDto.distance_KM,
+        est_deliver_time_min: createOrderDetailsDto.est_deliver_time_min,
+        delivery_cost: createOrderDetailsDto.delivery_cost
       };
-
-      addDoc(orderRef, order);
+      addDoc(orderRef,order);
+    } else {
+      throw new Error('User not authenticated.');
     }
+
   }
-  getOrdersByUserId(userId: string){
+  getOrdersByUserId(userId: string) {
     const ordersRef = collection(this.firestore, 'orders');
     const queryRef = query(ordersRef, where('user_id', '==', userId));
-    return collectionData(queryRef, { idField: 'order_id'}) as Observable<Order[]> ;
+    return collectionData(queryRef, { idField: 'order_id' }) as Observable<Order[]>;
   }
   getOrderCounter(): Observable<number> {
     const counterRef = doc(this.firestore, 'counters/order');
     return docData<any>(counterRef)
   }
-  getOrderByOrderId(orderId : string)  {
-      const orderRef = doc(this.firestore,`orders/${orderId}`);
-      return docData(orderRef, {idField:'order_id'}) as Observable<Order>
+  getOrderByOrderId(orderId: string) {
+    const orderRef = doc(this.firestore, `orders/${orderId}`);
+    return docData(orderRef, { idField: 'order_id' }) as Observable<Order>;
 
   }
 }

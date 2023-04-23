@@ -26,14 +26,18 @@
       <p>Address:</p>
       <p> {{ orderDetails.pickup.pick_recipient_address }}, {{ orderDetails.pickup.pick_recipient_city }}, {{ orderDetails.pickup.pick_recipient_county }}, {{ orderDetails.pickup.pick_recipient_eircode }}</p>
       <p>Phone: {{ orderDetails.pickup.pick_recipient_phone }}</p>
+
       <h3><strong>Drop off</strong></h3>
       <p>Name: {{ orderDetails.dropoff.drop_recipient_name }}</p>
       <p>Address: </p>
       <p> {{ orderDetails.dropoff.drop_recipient_address }}, {{ orderDetails.dropoff.drop_recipient_city }}, {{ orderDetails.dropoff.drop_recipient_county }}, {{ orderDetails.dropoff.drop_recipient_eircode }}</p>
       <p>Phone: {{ orderDetails.dropoff.drop_recipient_phone }}</p>
+
       <h3><strong>Payment</strong></h3>
       <p>Payment type: {{ orderDetails.payment.payment_type }}</p>
       <p *ngIf="orderDetails.payment.payer">Payer: {{ orderDetails.payment.payer }}</p>
+      <ion-text *ngIf="orderDetails.delivery_cost" size="large">Delivery Fee: {{ orderDetails.delivery_cost }}</ion-text>
+
     </ion-card-content>
 
   </ion-card>

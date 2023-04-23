@@ -8,11 +8,11 @@ export interface Order {
     remark?:               string;
     status:               string;
     delivery_mode:        string;
-    delivery_cost?:        string;
     created_date:         string;
     pick_up_time:         string;
-    distance_KM?:          number;
-    est_deliver_time_min?: number;
+    delivery_cost:        number; 
+    distance_KM:          number;
+    est_deliver_time_min: number;
 }
 
 export interface Dropoff {

@@ -5,6 +5,9 @@ export interface createOrderDetails {
     created_date:         string;
     pick_up_time:         string;
     payment:              Payment;
+    distance_KM:          number;
+    est_deliver_time_min: number;
+    delivery_cost:        number;
 }
 
 export interface Dropoff {

@@ -10,19 +10,23 @@ import { DropoffModalComponent } from '../components/dropoff-modal/dropoff-modal
 import { DateModalComponent } from '../components/date-modal/date-modal.component';
 import {CreateOrderDetailsService } from '../services/create-order-details.service'
 import { format,parseISO } from 'date-fns';
+import { GoogleMapService } from '../services/google-map.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  senderName = 'Sender Address';
-  receiverName = 'Receiver Adresss';
+  senderName = 'Sender Name';
+  receiverName = 'Receiver Name ';
   pickupDetails! : Pickup;
   dropoffDetails! : Dropoff;
   formattedDateString : string ='Pick date';
   option!: string ;
 	credentials!: FormGroup;
+  deliveryFee!:number;
+  duration !:number;
+  distance !:number;
 	constructor(
 		private fb: FormBuilder,
 		private loadingController: LoadingController,
@@ -30,13 +34,15 @@ export class HomePage {
 		private authService: AuthService,
 		private router: Router,
     private modalCtrl: ModalController,
-    private createOrderService : CreateOrderDetailsService
+    private createOrderService : CreateOrderDetailsService,
+    private googleMapService : GoogleMapService
 	) {
     
   }
   ngOnInit() {
 
     this.createForm();
+    
 	}
   createForm(){
 		this.credentials = this.fb.group({
@@ -93,7 +99,7 @@ export class HomePage {
 
   submit()
   {
-
+    this.calculateDeliveryFee("","");
     let createOrder: createOrderDetails = {
       pickup: {
         pick_recipient_name: this.pickupDetails.pick_recipient_name,
@@ -117,11 +123,19 @@ export class HomePage {
       delivery_mode: this.option,
       created_date: format(parseISO(format(new Date(),'yyyy-MM-dd HH:mm:ss')),'HH:mm, MMM d, yyyy'),
       pick_up_time: this.formattedDateString,
+      distance_KM : this.distance,
+      est_deliver_time_min : this.duration,
+      delivery_cost : this.deliveryFee
     };
     console.log(createOrder);
+
+
     this.createOrderService.setOrderDetails(createOrder);
     this.router.navigate(['create-order-details']);
   
+
+
+    
     // //using localstorage
     // let createOrderDetails = {
     //         pickup: this.pickupDetails,
@@ -146,5 +160,47 @@ export class HomePage {
     
     // console.log(navigationExtras.state);
     // this.router.navigate(['create-order-details'],navigationExtras);
+  }
+  
+  async calculateDeliveryFee(originAdd: string, destinationAdd: string) {
+    const a1= "10, oriel house, dublin road,dundalk";
+    const a2= "133,rockfield manor, hoeys lane, dundalk";
+    const firstAddressLatLng = await this.getAddressLatLng(a1);
+    const secondAddressLatLng = await this.getAddressLatLng(a2);
+
+    if (firstAddressLatLng && secondAddressLatLng) {
+      const distanceInMeters = await this.googleMapService.getDistanceBetweenAddress(firstAddressLatLng.lat, firstAddressLatLng.lng, secondAddressLatLng.lat, secondAddressLatLng.lng);
+      console.log("Distance in meters:", distanceInMeters);
+
+      //geting distance in KM
+      this.distance = distanceInMeters.rows[0].elements[0].distance.value /1000;
+      //this will return duration in second
+      this.duration = distanceInMeters.rows[0].elements[0].duration.value;
+      
+      const baseRate = 2.2;
+       this.deliveryFee = parseFloat((baseRate * this.distance).toFixed(2)); 
+
+      console.log('distance'+ this.distance + "duration : "+ this.duration + " Delivery fee : "+this.deliveryFee);
+      // this.createOrder.setOrderDetails({ delivery_cost: deliveryFee });
+      // this.createOrder.setOrderDetails({ est_deliver_time_min: this.duration/60 });
+      // this.createOrder.setOrderDetails({ distance_KM: this.distance });
+      // distance_KM?:          number;
+      // est_deliver_time_min?: number;
+      // delivery_cost?:        number;
+      return parseFloat((baseRate * this.distance).toFixed(2)); 
+    } else {
+      console.error("Error getting lat and lng for one or both addresses");
+      return null;
+    }
+  }
+  async getAddressLatLng(address: string): Promise<{ lat: number; lng: number } | null> {
+    try {
+      const latLng = await this.googleMapService.getLatLngFromAddress(address);
+      console.log('Latitude:', latLng.lat, 'Longitude:', latLng.lng);
+      return latLng;
+    } catch (error) {
+      console.error('Error getting LatLng:', error);
+      return null;
+    }
   }
 }
