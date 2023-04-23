@@ -106,11 +106,11 @@ export class HomePage {
     console.log('orig add : ' + originAddress);
     console.log('destination add : ' + detinationAddress);
     await this.calculateDeliveryFee(originAddress,detinationAddress);
-
+    
     let createOrder: createOrderDetails = {
       pickup: {
         pick_recipient_name: this.pickupDetails.pick_recipient_name,
-        pick_recipient_addregitss: this.pickupDetails.pick_recipient_address,
+        pick_recipient_address: this.pickupDetails.pick_recipient_address,
         pick_recipient_city: this.pickupDetails.pick_recipient_city,
         pick_recipient_county: this.pickupDetails.pick_recipient_county,
         pick_recipient_eircode: this.pickupDetails.pick_recipient_eircode,
