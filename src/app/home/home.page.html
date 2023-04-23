@@ -25,14 +25,14 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <!-- <form [formGroup]="credentials"> -->
-    <form>
+    <form [formGroup]="credentials">
       <ion-item lines="none">
         <div slot="start">
           <ion-label>{{ senderName }}</ion-label>
         </div>
         <div slot="end">
           <ion-button class='buttonStyle' expand="block" (click)="openPickUpModal()">+</ion-button>
+          <input type="hidden" formControlName="pickup">
         </div>
       </ion-item>
       <ion-item lines="none">
@@ -41,22 +41,31 @@
         </div>
         <div slot="end">
           <ion-button class='buttonStyle' expand="block" (click)="openDropOffModal()">+</ion-button>
+          <input type="hidden" formControlName="dropoff">
         </div>
       </ion-item>
-      <ion-item lines="none">
+      <!-- <ion-item lines="none">
         <div slot="end"> <ion-icon (click)="openDateModal()" icon='calendar-outline' slot="start"
             color="primary"></ion-icon></div>
         <div slot="start">{{ formattedDateString }}</div>
-      </ion-item>
+      </ion-item> -->
       <ion-item lines="none">
-        <ion-select (ionChange)="deliveryOption($event)" interface="action-sheet" placeholder="Delivery option">
+        <div slot="end">
+          <ion-icon (click)="openDateModal()" icon='calendar-outline' slot="start" color="primary"></ion-icon>
+        </div>
+        <div slot="start">{{ formattedDateString }}</div>
+        <input type="hidden" formControlName="pickupDate">
+      </ion-item>
+      
+      <ion-item lines="none">
+        <ion-select  formControlName="deliveryOption" (ionChange)="deliveryOption($event)" interface="action-sheet" placeholder="Delivery option">
           <ion-select-option value="car-5">Car - 5kg </ion-select-option>
           <ion-select-option value="car-20">Car - 20kg</ion-select-option>
           <ion-select-option value="car-50">Car - 50kg</ion-select-option>
           <ion-select-option value="van-100">Van - 100kg</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button class='buttonStyle' (click)="submit()">Next</ion-button>
+      <ion-button class='buttonStyle' (click)="submit()" [disabled]="!credentials.valid">Next</ion-button>
       <!-- [disabled]="!credentials.valid -->
     </form>
   </ion-content>

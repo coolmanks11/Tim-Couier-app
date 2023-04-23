@@ -46,7 +46,10 @@ export class HomePage {
 	}
   createForm(){
 		this.credentials = this.fb.group({
-
+      pickup: ['', Validators.required],
+      dropoff: ['', Validators.required],
+      pickupDate: ['', Validators.required],
+      deliveryOption: ['', Validators.required]
 		});
 
   }
@@ -61,6 +64,7 @@ export class HomePage {
     if (role === 'confirm') {
       this.pickupDetails = data
       this.senderName  = this.pickupDetails.pick_recipient_name
+      this.credentials.get('pickup')?.setValue(this.pickupDetails.pick_recipient_name);
       console.log(JSON.stringify(this.pickupDetails))
     }
   }
@@ -75,6 +79,7 @@ export class HomePage {
     if (role === 'confirm') {
       this.dropoffDetails = data
       this.receiverName  = this.dropoffDetails.drop_recipient_name
+      this.credentials.get('dropoff')?.setValue(this.dropoffDetails.drop_recipient_name);
       console.log(JSON.stringify(this.dropoffDetails))
     }
   }
@@ -83,13 +88,12 @@ export class HomePage {
       component: DateModalComponent,
     });
     modal.present();
-
+  
     const { data, role } = await modal.onWillDismiss();
-
+  
     if (role === 'confirm') {
-      console.log(data)
-      this.formattedDateString = data
-      console.log(this.formattedDateString)
+      this.formattedDateString = data;
+      this.credentials.get('pickupDate')?.setValue(data);
     }
   }
   deliveryOption(event:any){
@@ -101,6 +105,7 @@ export class HomePage {
   }
   async submit()
   {
+    
     const originAddress = this.createAddressString(this.pickupDetails.pick_recipient_address,this.pickupDetails.pick_recipient_city,this.pickupDetails.pick_recipient_county);
     const detinationAddress = this.createAddressString(this.dropoffDetails.drop_recipient_address,this.dropoffDetails.drop_recipient_city,this.dropoffDetails.drop_recipient_county);
     console.log('orig add : ' + originAddress);
