@@ -96,14 +96,21 @@ export class HomePage {
     this.option = event.target.value;
     console.log(this.option);
   }
-
-  submit()
+   createAddressString(address :string , city:string , county:string ) {
+    return `${address}, ${city}, ${county}`;
+  }
+  async submit()
   {
-    this.calculateDeliveryFee("","");
+    const originAddress = this.createAddressString(this.pickupDetails.pick_recipient_address,this.pickupDetails.pick_recipient_city,this.pickupDetails.pick_recipient_county);
+    const detinationAddress = this.createAddressString(this.dropoffDetails.drop_recipient_address,this.dropoffDetails.drop_recipient_city,this.dropoffDetails.drop_recipient_county);
+    console.log('orig add : ' + originAddress);
+    console.log('destination add : ' + detinationAddress);
+    await this.calculateDeliveryFee(originAddress,detinationAddress);
+
     let createOrder: createOrderDetails = {
       pickup: {
         pick_recipient_name: this.pickupDetails.pick_recipient_name,
-        pick_recipient_address: this.pickupDetails.pick_recipient_address,
+        pick_recipient_addregitss: this.pickupDetails.pick_recipient_address,
         pick_recipient_city: this.pickupDetails.pick_recipient_city,
         pick_recipient_county: this.pickupDetails.pick_recipient_county,
         pick_recipient_eircode: this.pickupDetails.pick_recipient_eircode,
@@ -163,10 +170,8 @@ export class HomePage {
   }
   
   async calculateDeliveryFee(originAdd: string, destinationAdd: string) {
-    const a1= "10, oriel house, dublin road,dundalk";
-    const a2= "133,rockfield manor, hoeys lane, dundalk";
-    const firstAddressLatLng = await this.getAddressLatLng(a1);
-    const secondAddressLatLng = await this.getAddressLatLng(a2);
+    const firstAddressLatLng = await this.getAddressLatLng(originAdd);
+    const secondAddressLatLng = await this.getAddressLatLng(destinationAdd);
 
     if (firstAddressLatLng && secondAddressLatLng) {
       const distanceInMeters = await this.googleMapService.getDistanceBetweenAddress(firstAddressLatLng.lat, firstAddressLatLng.lng, secondAddressLatLng.lat, secondAddressLatLng.lng);
