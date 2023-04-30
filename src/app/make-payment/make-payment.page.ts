@@ -15,12 +15,12 @@ import { first, lastValueFrom } from 'rxjs';
 })
 export class MakePaymentPage implements OnInit {
   paymentType: string = "card";
-  paymentForm: FormGroup;
+  // paymentForm: FormGroup;
   payer: string = "sender";
   data: any = {
-    name: 'Zi jie Lee',
-    email: 'jie_0827@hotmail.com',
-    amount: 1,
+    name: 'jay',
+    email: 'asd@asd.com',
+    amount: 10,
     currency: 'EUR'
   };
 
@@ -36,12 +36,12 @@ export class MakePaymentPage implements OnInit {
     Stripe.initialize({
       publishableKey: environment.stripe.publishableKey,
     });
-    this.paymentForm = this.fb.group({
-      cardNumber: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{16}$')])],
-      expiryDate: ['', Validators.compose([Validators.required, Validators.pattern('^(0[1-9]|1[0-2])([0-9]{2})$')])],
-      cvv: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{3}$')])],
-      amount: ['', Validators.compose([Validators.required, Validators.pattern('^\\d+$')])]
-    });
+    // this.paymentForm = this.fb.group({
+    //   cardNumber: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{16}$')])],
+    //   expiryDate: ['', Validators.compose([Validators.required, Validators.pattern('^(0[1-9]|1[0-2])([0-9]{2})$')])],
+    //   cvv: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{3}$')])],
+    //   amount: ['', Validators.compose([Validators.required, Validators.pattern('^\\d+$')])]
+    // });
   }
 
 
@@ -52,37 +52,37 @@ export class MakePaymentPage implements OnInit {
 
   }
   async onSubmit() {
-    if (this.paymentForm.valid) {
-      const cardNumber = this.paymentForm.value.cardNumber;
-      const expiryDate = this.paymentForm.value.expiryDate.split('/');
-      const cvv = this.paymentForm.value.cvv;
-      const amount = this.paymentForm.value.amount;
+    // if (this.paymentForm.valid) {
+    //   const cardNumber = this.paymentForm.value.cardNumber;
+    //   const expiryDate = this.paymentForm.value.expiryDate.split('/');
+    //   const cvv = this.paymentForm.value.cvv;
+    //   const amount = this.paymentForm.value.amount;
 
-      //   const token = await this.stripe.createCardToken({
-      //     number: cardNumber,
-      //     expMonth: parseInt(expiryDate[0], 10),
-      //     expYear: parseInt(expiryDate[1], 10),
-      //     cvc: cvv
-      //   });
+    //   //   const token = await this.stripe.createCardToken({
+    //   //     number: cardNumber,
+    //   //     expMonth: parseInt(expiryDate[0], 10),
+    //   //     expYear: parseInt(expiryDate[1], 10),
+    //   //     cvc: cvv
+    //   //   });
 
-      //   // Process payment using token and amount
+    //   //   // Process payment using token and amount
 
-      //   const alert = await this.alertController.create({
-      //     header: 'Payment Successful',
-      //     message: `Your payment of $${amount} has been successfully processed.`,
-      //     buttons: ['OK']
-      //   });
+    //   //   const alert = await this.alertController.create({
+    //   //     header: 'Payment Successful',
+    //   //     message: `Your payment of $${amount} has been successfully processed.`,
+    //   //     buttons: ['OK']
+    //   //   });
 
-      //   await alert.present();
-      // } else {
-      //   const alert = await this.alertController.create({
-      //     header: 'Invalid Form',
-      //     message: 'Please correct the errors in the form and try again.',
-      //     buttons: ['OK']
-      //   });
+    //   //   await alert.present();
+    //   // } else {
+    //   //   const alert = await this.alertController.create({
+    //   //     header: 'Invalid Form',
+    //   //     message: 'Please correct the errors in the form and try again.',
+    //   //     buttons: ['OK']
+    //   //   });
 
-      //   await alert.present();
-    }
+    //   //   await alert.present();
+    // }
     this.createOrder();
   }
   async createOrder() {
@@ -109,7 +109,7 @@ export class MakePaymentPage implements OnInit {
     await this.paymentSheet();
 		await loading.dismiss();
 
-    
+
 
   }
   async paymentSheet() {

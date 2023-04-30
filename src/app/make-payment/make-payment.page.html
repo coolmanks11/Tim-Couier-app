@@ -5,7 +5,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-list>
     <ion-label><h1><strong>Type</strong></h1></ion-label>
     <ion-radio-group [(ngModel)]="paymentType">
@@ -20,8 +20,28 @@
     </ion-radio-group>
   </ion-list>
   <hr>
-  
-<ion-list  *ngIf="paymentType=='cash'">
+  <ion-list *ngIf="paymentType=='cash'; then cashContent; else cardContent;"></ion-list>
+
+  <ng-template #cashContent>
+    <ion-label><h1><strong>Payer</strong></h1></ion-label>
+    <ion-radio-group [(ngModel)]="payer">
+      <ion-item lines="none">
+        <ion-label>Sender</ion-label>
+        <ion-radio value="sender"></ion-radio>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Receiver</ion-label>
+        <ion-radio value="receiver"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <br>
+    <ion-button expand="block" (click)="createOrder()">Create Order</ion-button>
+  </ng-template>
+
+  <ng-template #cardContent>
+    <ion-button expand="block" (click)="makePaymentSheet()">Make Payment</ion-button>
+  </ng-template>
+<!-- <ion-list  *ngIf="paymentType=='cash'">
   <ion-label><h1><strong>Payer</strong></h1></ion-label>
   <ion-radio-group [(ngModel)]="payer" >
     <ion-item lines="none">
@@ -34,9 +54,12 @@
     </ion-item>
   </ion-radio-group>
   <br>
-  <ion-button class="ion-float-right"  (click)=createOrder()>Create</ion-button>
-</ion-list>
-<form *ngIf="paymentType === 'card'" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+  <ion-button *ngIf="paymentType=='cash'" expand="block"  (click)=createOrder()>Create Order</ion-button>
+  <ion-button *ngIf="paymentType=='card'" expand="block" (click)="makePaymentSheet()">Make Payment</ion-button>
+
+
+</ion-list> -->
+<!-- <form *ngIf="paymentType === 'card'" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
   <ion-label><h1><strong>Card Details</strong></h1></ion-label>
   <ion-list>
       <ion-item lines="none">
@@ -60,8 +83,6 @@
   </ion-list>
   <br>
   <ion-button class="ion-float-right" type="submit">Make Payment</ion-button>
-</form>
-<ion-button expand-="block" (click)="makePaymentSheet()">Make Payment</ion-button>
-
+</form> -->
 
 </ion-content>

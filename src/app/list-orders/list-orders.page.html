@@ -7,7 +7,7 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <app-side-menu></app-side-menu>
+    <!-- <app-side-menu></app-side-menu> -->
   </ion-content>
 </ion-menu>
 
@@ -16,7 +16,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+        <!-- <ion-menu-button></ion-menu-button> -->
       </ion-buttons>
       <ion-title>Orders</ion-title>
       <div slot="end">
@@ -32,7 +32,7 @@
   
     <!-- <ion-item lines="none"><ion-button (click)="refresh()" slot="end"><ion-icon name="refresh-outline"></ion-icon></ion-button></ion-item> -->
     <div *ngIf="orders && orders.length">
-      <ion-card *ngFor="let order of orders" button [routerLink]="['/order-details/', order.order_id]">
+      <ion-card *ngFor="let order of orders" button [routerLink]="['/order-details/', order.order_id]" [ngClass]="{'delivered-card': order.status === 'delivered parcel'}">
         <ion-card-header>
           <ion-card-title>{{order.pick_up_time}}</ion-card-title>
           <ion-card-subtitle>{{order.status}}</ion-card-subtitle>
@@ -49,8 +49,13 @@
       </ion-card>
 
     </div>
-    <ion-list *ngIf="orders==null">
-
+    <ion-list *ngIf="orders.length==0">
+      <ion-card id="not-found-card"class="ion-text-center" >
+        <ion-card-header>
+          <ion-card-title>No order found</ion-card-title>
+          <ion-card-subtitle>Pull down for refresh</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
     </ion-list>
   </ion-content>
 </div>
