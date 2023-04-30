@@ -59,8 +59,9 @@
       <ion-note *ngIf="paymentForm.controls['cvv'].invalid && paymentForm.controls['cvv'].touched">Please enter a valid CVV number</ion-note>
   </ion-list>
   <br>
-  <ion-button class="ion-float-right" type="submit">Pay</ion-button>
+  <ion-button class="ion-float-right" type="submit">Make Payment</ion-button>
 </form>
+<ion-button expand-="block" (click)="makePaymentSheet()">Make Payment</ion-button>
 
 
 </ion-content>

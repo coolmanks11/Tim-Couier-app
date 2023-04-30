@@ -4,4 +4,15 @@
     <string name="title_activity_main">userApp</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
+
+    <string name="publishable_key">pk_test_51N2KrjI7uco9pmC2AMFIMcfZl1vplPGcq2n30LOkoOSRISV7eY1b4neS1uovhVb4juRWlTXzuOVH98QhHjXHZthE00kn5YzvEa</string>
+    <bool name="enable_google_pay">true</bool>
+    <string name="country_code">IE</string>
+    <string name="merchant_display_name">TIM</string>
+    <bool name="google_pay_is_testing">true</bool>
+
+    <!-- <bool name="email_address_required">true</bool>
+    <bool name="phone_number_required">true</bool>
+    <bool name="billing_address_required">true</bool>
+    <string name="billing_address_format">Full</string> --> 
 </resources>
