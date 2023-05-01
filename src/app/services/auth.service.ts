@@ -74,4 +74,7 @@ export class AuthService {
 
 		return this.auth.currentUser;
 	}
+	getUserEmail(){
+		return this.auth.currentUser?.email;
+	}
 }

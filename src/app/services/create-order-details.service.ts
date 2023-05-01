@@ -49,6 +49,10 @@ export class CreateOrderDetailsService {
   //   this.orderDetails = { ...this.orderDetails, ...partialOrderDetails };
   // }
   
+  getOrdersDeliveryFee()
+  {
+    return this.orderDetails.delivery_cost;
+  }
   setOrderDetails(od : createOrderDetails){
     this.orderDetails = od
   }

@@ -8,6 +8,7 @@ import { ApplePayEventsEnum, GooglePayEventsEnum, PaymentFlowEventsEnum, Payment
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { first, lastValueFrom } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-make-payment',
   templateUrl: './make-payment.page.html',
@@ -17,10 +18,10 @@ export class MakePaymentPage implements OnInit {
   paymentType: string = "card";
   // paymentForm: FormGroup;
   payer: string = "sender";
+  deliveryFee!:number;
   data: any = {
-    name: 'jay',
-    email: 'asd@asd.com',
-    amount: 10,
+    name: this.auth.getCurrentUser()?.uid,
+    email: this.auth.getUserEmail(),
     currency: 'EUR'
   };
 
@@ -32,10 +33,12 @@ export class MakePaymentPage implements OnInit {
     private router : Router,
     private http :HttpClient,
     private loadingController: LoadingController,
+    private auth : AuthService
   ) {
     Stripe.initialize({
       publishableKey: environment.stripe.publishableKey,
     });
+    this.deliveryFee = this.createOrderDetailsService.getOrdersDeliveryFee();
     // this.paymentForm = this.fb.group({
     //   cardNumber: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{16}$')])],
     //   expiryDate: ['', Validators.compose([Validators.required, Validators.pattern('^(0[1-9]|1[0-2])([0-9]{2})$')])],
@@ -47,7 +50,12 @@ export class MakePaymentPage implements OnInit {
 
 
   ngOnInit() {
+    console.log('data' +JSON.stringify(this.data));
   }
+  get amount() {
+    return this.deliveryFee * 100;
+  }
+  
   checkPaymentType() {
 
   }
@@ -83,7 +91,11 @@ export class MakePaymentPage implements OnInit {
 
     //   //   await alert.present();
     // }
-    this.createOrder();
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.createOrder();
+    await loading.dismiss();
+    
   }
   async createOrder() {
     let orderDetails = this.createOrderDetailsService.getOrderDetails();
@@ -130,7 +142,8 @@ export class MakePaymentPage implements OnInit {
       //   fromObject: this.data
       // });
       // Connect to your backend endpoint, and get every key.
-      const data$ = this.httpPost(this.data);
+      const data$ = this.httpPost({...this.data, amount: this.amount});
+
 
       const { paymentIntent, ephemeralKey, customer } = await lastValueFrom(data$);
 

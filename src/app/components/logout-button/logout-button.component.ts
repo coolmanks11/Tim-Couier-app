@@ -17,13 +17,13 @@ export class LogoutButtonComponent implements OnInit {
     ) { }
 
   ngOnInit() {}
-  logout()
+  async logout()
   {
     console.log("logout"+localStorage.getItem("userId"));
     if(localStorage.getItem("userId")!=null)
     {
       localStorage.clear();
-       this.authService.logout();
+      await this.authService.logout();
        this.logOutAlert("Logged Out");
     }else{
     console.log("no user login ");
