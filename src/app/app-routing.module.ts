@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'animation-page',
     pathMatch: 'full'
   },
   {
@@ -53,6 +53,10 @@ const routes: Routes = [
     path: 'order-details/:id',
     loadChildren: () => import('./order-details/order-details.module').then( m => m.OrderDetailsPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'animation-page',
+    loadChildren: () => import('./pages/animation-page/animation-page.module').then( m => m.AnimationPagePageModule)
   },
 ];
 
