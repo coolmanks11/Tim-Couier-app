@@ -41,22 +41,10 @@
       <ion-label position="stacked" ><strong>Tel:</strong></ion-label>
       <p><ion-text>{{orderDetails.dropoff.drop_recipient_phone}}</ion-text></p>        
     </ion-card-content>
-    <ion-card-content *ngIf="orderDetails.dropoff">
-      <ion-label position="stacked" ><strong>RECEIVER DETAILS </strong></ion-label>
-      <hr>
-      <ion-label position="stacked" ><strong>Name :</strong></ion-label>
-      <p><ion-text>{{orderDetails.dropoff.drop_recipient_name}}</ion-text></p>
-      <ion-label position="stacked" ><strong>Address :</strong></ion-label>
-      <p><ion-text>{{orderDetails.dropoff.drop_recipient_address}}</ion-text></p>
-      <p><ion-text>{{orderDetails.dropoff.drop_recipient_city}}</ion-text></p>
-      <p><ion-text>{{orderDetails.dropoff.drop_recipient_county}}</ion-text></p>
-      <p><ion-text>{{orderDetails.dropoff.drop_recipient_eircode}}</ion-text></p>
-      <ion-label position="stacked" ><strong>Tel:</strong></ion-label>
-      <p><ion-text>{{orderDetails.dropoff.drop_recipient_phone}}</ion-text></p>        
-    </ion-card-content>
+
 
     <ion-card-content *ngIf="orderDetails">
-      <ion-label position="stacked" ><strong>Time :</strong></ion-label>
+      <ion-label position="stacked" ><strong>Pick up time :</strong></ion-label>
       <p><ion-text>{{orderDetails.pick_up_time}}</ion-text></p>
       <ion-label position="stacked" ><strong>Delivery Mode :</strong></ion-label>
       <p><ion-text>{{orderDetails.delivery_mode}}Kg</ion-text></p>

@@ -112,62 +112,70 @@ export class MakePaymentPage implements OnInit {
     });
     await alert.present();
     this.createOrderDetailsService.resetOrderDetails();
-    this.router.navigate(['home']);
+    this.router.navigate(['list-orders']);
 
   }
-  async makePaymentSheet(){
-		const loading = await this.loadingController.create();
+  async makePaymentSheet() {
+    const loading = await this.loadingController.create();
     await loading.present();
-    await this.paymentSheet();
-		await loading.dismiss();
+  
+    let paymentSuccessful = false;
+    try {
+      paymentSuccessful = await this.paymentSheet();
+    } catch (e) {
+      console.log('payment error: ',e);
+      await this.presentErrorAlert('Payment Failure',"Please try again");
 
-
-
+    }
+    await loading.dismiss();
+    console.log(paymentSuccessful);
+    if (paymentSuccessful) {
+      // await loading.present();
+      await this.createOrder();
+      // await loading.dismiss();
+    }
   }
   async paymentSheet() {
-    /*
-    With PaymentSheet, you can make payments in a single flow. 
-    As soon as the User presses the payment button, 
-    the payment is completed. (If you want user have some flow after that, 
-    please use paymentFlow method)
-    */
-
     try {
-      // be able to get event of PaymentSheet
       Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
         console.log('PaymentSheetEventsEnum.Completed');
       });
-    
-      // const data = new HttpParams({
-      //   fromObject: this.data
-      // });
-      // Connect to your backend endpoint, and get every key.
-      const data$ = this.httpPost({...this.data, amount: this.amount});
-
-
+  
+      const data$ = this.httpPost({ ...this.data, amount: this.amount });
+  
       const { paymentIntent, ephemeralKey, customer } = await lastValueFrom(data$);
-
+  
       console.log('paymentIntent: ', paymentIntent);
-
-      // prepare PaymentSheet with CreatePaymentSheetOption.
+  
       await Stripe.createPaymentSheet({
         paymentIntentClientSecret: paymentIntent,
         customerId: customer,
         customerEphemeralKeySecret: ephemeralKey,
-        merchantDisplayName: 'TIM'
+        merchantDisplayName: 'TIM',
       });
-
+  
       console.log('createPaymentSheet');
-      // present PaymentSheet and get result.
       const result = await Stripe.presentPaymentSheet();
       console.log('result: ', result);
       if (result && result.paymentResult === PaymentSheetEventsEnum.Completed) {
-        // Happy path
         this.splitAndJoin(paymentIntent);
+        return true;
+      } else {
+        throw new Error('PaymentSheet transaction failed');
       }
-    } catch(e) {
+    } catch (e) {
       console.log(e);
+      throw e;
     }
+  }
+  async presentErrorAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK'],
+    });
+  
+    await alert.present();
   }
   async paymentFlow() {
     /* 

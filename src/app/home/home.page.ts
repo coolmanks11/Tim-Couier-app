@@ -21,7 +21,7 @@ export class HomePage {
   receiverName = 'Receiver Name ';
   pickupDetails! : Pickup;
   dropoffDetails! : Dropoff;
-  formattedDateString : string ='Pick date';
+  formattedDateString : string ='Pick up time';
   option!: string ;
 	credentials!: FormGroup;
   deliveryFee!:number;
@@ -136,7 +136,7 @@ export class HomePage {
       created_date: format(parseISO(format(new Date(),'yyyy-MM-dd HH:mm:ss')),'HH:mm, MMM d, yyyy'),
       pick_up_time: this.formattedDateString,
       distance_KM : this.distance,
-      est_deliver_time_min : this.duration,
+      est_deliver_time_min : parseFloat((this.duration / 60).toFixed(2)),
       delivery_cost : this.deliveryFee
     };
     console.log(createOrder);

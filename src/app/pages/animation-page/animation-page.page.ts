@@ -9,7 +9,7 @@ export class AnimationPagePage implements OnInit {
 
   constructor(public router:Router) { 
     setTimeout(()=>{
-      this.router.navigateByUrl('/login'  );
+      this.router.navigateByUrl('/login');
     },5000)
   }
 

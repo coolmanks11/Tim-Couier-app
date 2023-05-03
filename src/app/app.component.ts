@@ -20,10 +20,12 @@ export class AppComponent implements OnInit {
       });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.displayTabMenu = this.shouldDisplayTabMenu();
+  }
 
   shouldDisplayTabMenu(): boolean {
     const currentRoute = this.router.url;
-    return currentRoute !== '/animation-page' && currentRoute !== '/';
+    return currentRoute !== '/animation-page' && currentRoute !== '/' ;
   }
 }

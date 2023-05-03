@@ -1,10 +1,10 @@
 ion-content{
     --background :orange;
 }
-@-webkit-keyframes scale-up-top{0%{-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:50% 0;transform-origin:50% 0}100%{-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 0;transform-origin:50% 0}}@keyframes scale-up-top{0%{-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:50% 0;transform-origin:50% 0}100%{-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 0;transform-origin:50% 0}}
+@-webkit-keyframes scale-up-center{0%{-webkit-transform:scale(.5);transform:scale(.5)}100%{-webkit-transform:scale(1);transform:scale(1)}}@keyframes scale-up-center{0%{-webkit-transform:scale(.5);transform:scale(.5)}100%{-webkit-transform:scale(1);transform:scale(1)}}
 .container{
-    -webkit-animation: scale-up-top 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.5s both;
-    animation: scale-up-top 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.5s both;
+	-webkit-animation: scale-up-center 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
+	        animation: scale-up-center 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
     img{
         
         margin-top: 200px;
