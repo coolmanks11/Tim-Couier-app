@@ -44,6 +44,10 @@
 
 
     <ion-card-content *ngIf="orderDetails">
+      <ion-label position="stacked" ><strong>Distance (KM) :</strong></ion-label>
+      <p><ion-text>{{orderDetails.distance_KM}}</ion-text></p>
+      <ion-label position="stacked" ><strong>Estimate time (Min)- Once picked up</strong></ion-label>
+      <p><ion-text>{{orderDetails.est_deliver_time_min}}</ion-text></p>
       <ion-label position="stacked" ><strong>Pick up time :</strong></ion-label>
       <p><ion-text>{{orderDetails.pick_up_time}}</ion-text></p>
       <ion-label position="stacked" ><strong>Delivery Mode :</strong></ion-label>

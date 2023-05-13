@@ -33,7 +33,6 @@ export class CreateOrderDetailsPage implements OnInit {
   }
  
   makePayment() {
-
     this.router.navigate(['make-payment']);
   }
 }

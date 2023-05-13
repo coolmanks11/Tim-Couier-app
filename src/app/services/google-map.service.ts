@@ -47,7 +47,7 @@ export class GoogleMapService {
     });
   }
   
-  
+    
   
   // getDistanceBetweenAddress(originLat: number, originLon: number, destinationsLat: number, destinationsLon: number) {
   //   this.initMap();

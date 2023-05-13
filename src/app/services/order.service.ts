@@ -76,6 +76,6 @@ export class OrderService {
   getOrderByOrderId(orderId: string) {
     const orderRef = doc(this.firestore, `orders/${orderId}`);
     return docData(orderRef, { idField: 'order_id' }) as Observable<Order>;
-
+  
   }
 }

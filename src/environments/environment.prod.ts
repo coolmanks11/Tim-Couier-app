@@ -14,6 +14,6 @@ export const environment = {
     publishableKey : 'pk_live_51N2KrjI7uco9pmC25uXQJsnsW3R0ZaszRz79fOJ9i2V6F0JbebwwgZBnnXuFKc8p1k5InDguAc355EafkRMqBaPL00qeHy5qu7',
     secretKey :'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'
   },
-  api : 'http://192.168.1.17:3000/'
+  api : 'http://localhost:3000/'
   
 };
