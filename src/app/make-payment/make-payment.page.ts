@@ -81,7 +81,7 @@ export class MakePaymentPage implements OnInit {
   async makePaymentSheet() {
     const loading = await this.loadingController.create();
     await loading.present();
-  
+
     let paymentSuccessful = false;
     try {
       paymentSuccessful = await this.paymentSheet();
@@ -89,7 +89,7 @@ export class MakePaymentPage implements OnInit {
       console.log('payment error: ',e);
       await this.presentErrorAlert('Payment Failure',"Please try again");
 
-    }
+    } 
     await loading.dismiss();
     console.log(paymentSuccessful);
     if (paymentSuccessful) {

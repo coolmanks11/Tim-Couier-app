@@ -69,13 +69,14 @@ export class OrderService {
     const queryRef = query(ordersRef, where('user_id', '==', userId));
     return collectionData(queryRef, { idField: 'order_id' }) as Observable<Order[]>;
   }
-  getOrderCounter(): Observable<number> {
-    const counterRef = doc(this.firestore, 'counters/order');
-    return docData<any>(counterRef)
-  }
+
   getOrderByOrderId(orderId: string) {
     const orderRef = doc(this.firestore, `orders/${orderId}`);
     return docData(orderRef, { idField: 'order_id' }) as Observable<Order>;
   
+  }
+  getOrderCounter(): Observable<number> {
+    const counterRef = doc(this.firestore, 'counters/order');
+    return docData<any>(counterRef)
   }
 }

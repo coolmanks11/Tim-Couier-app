@@ -11,9 +11,9 @@ export const environment = {
     measurementId: "G-2XDX4QYNHE"
   },
   stripe:{
-    publishableKey : 'pk_live_51N2KrjI7uco9pmC25uXQJsnsW3R0ZaszRz79fOJ9i2V6F0JbebwwgZBnnXuFKc8p1k5InDguAc355EafkRMqBaPL00qeHy5qu7',
-    secretKey :'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'
+    publishableKey : 'pk_test_51N2KrjI7uco9pmC2AMFIMcfZl1vplPGcq2n30LOkoOSRISV7eY1b4neS1uovhVb4juRWlTXzuOVH98QhHjXHZthE00kn5YzvEa',
+    secretKey :'sk_test_51N2KrjI7uco9pmC23IuCgi1vxVQ6vpIecOhl8nswYr0vQ1Ldm26F3tY4U6I7Ku5xWPBwp1WaWVUxNzouC6VibBsI00AMIJOb6Q'
   },
-  api : 'http://localhost:3000/'
+  api : 'http://192.168.1.17:3000/'
   
 };
